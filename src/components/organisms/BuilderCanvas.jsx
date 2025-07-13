@@ -171,17 +171,8 @@ const BuilderCanvas = ({
                         >
                           <ApperIcon name="Trash2" size={14} />
                         </Button>
-                      </div>
+</div>
                     </div>
-
-                    {/* AI Enabled Indicator */}
-                    {component.aiEnabled && (
-                      <div className="absolute -top-2 -left-2 z-10">
-                        <div className="w-6 h-6 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center animate-pulse-glow">
-                          <ApperIcon name="Bot" size={12} className="text-white" />
-                        </div>
-                      </div>
-                    )}
 
                     <ComponentRenderer component={component} />
                   </motion.div>
