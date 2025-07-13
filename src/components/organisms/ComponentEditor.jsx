@@ -7,14 +7,8 @@ import ApperIcon from "@/components/ApperIcon";
 
 const ComponentEditor = ({ component, onUpdate, onClose }) => {
   const [content, setContent] = useState(component.content);
-  const [aiEnabled, setAiEnabled] = useState(component.aiEnabled);
-  const [aiRules, setAiRules] = useState(component.aiTriggerRules || {
-    showWhen: "",
-    keywords: [],
-    priority: 1
-  });
 
-  const handleContentChange = (field, value) => {
+const handleContentChange = (field, value) => {
     const newContent = { ...content, [field]: value };
     setContent(newContent);
     onUpdate(component.Id, { content: newContent });
@@ -24,22 +18,6 @@ const ComponentEditor = ({ component, onUpdate, onClose }) => {
     const newFeatures = [...(content.features || [])];
     newFeatures[index] = { ...newFeatures[index], [field]: value };
     handleContentChange("features", newFeatures);
-  };
-
-  const handleAiEnabledChange = (enabled) => {
-    setAiEnabled(enabled);
-    onUpdate(component.Id, { aiEnabled: enabled });
-  };
-
-  const handleAiRulesChange = (field, value) => {
-    const newRules = { ...aiRules, [field]: value };
-    setAiRules(newRules);
-    onUpdate(component.Id, { aiTriggerRules: newRules });
-  };
-
-  const handleKeywordsChange = (value) => {
-    const keywords = value.split(",").map(k => k.trim()).filter(k => k);
-    handleAiRulesChange("keywords", keywords);
   };
 
   const renderContentEditor = () => {
@@ -234,51 +212,10 @@ const ComponentEditor = ({ component, onUpdate, onClose }) => {
       </div>
 
       {/* Content Editor */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-6">
+<div className="flex-1 overflow-y-auto p-4">
         <div>
           <h4 className="text-sm font-medium text-slate-200 mb-4">Content</h4>
           {renderContentEditor()}
-        </div>
-
-        {/* AI Configuration */}
-        <div className="border-t border-slate-700 pt-6">
-          <div className="flex items-center space-x-3 mb-4">
-            <Checkbox
-              checked={aiEnabled}
-              onChange={handleAiEnabledChange}
-            />
-            <div>
-              <h4 className="text-sm font-medium text-slate-200">AI Enabled</h4>
-              <p className="text-xs text-slate-400">Allow AI to display this component</p>
-            </div>
-          </div>
-
-          {aiEnabled && (
-            <div className="space-y-4 pl-7">
-              <FormField
-                label="Show When"
-                placeholder="e.g., user asks about services"
-                value={aiRules.showWhen || ""}
-                onChange={(e) => handleAiRulesChange("showWhen", e.target.value)}
-              />
-              
-              <FormField
-                label="Keywords"
-                placeholder="e.g., services, pricing, contact"
-                value={aiRules.keywords?.join(", ") || ""}
-                onChange={(e) => handleKeywordsChange(e.target.value)}
-              />
-              
-              <FormField
-                label="Priority"
-                type="number"
-                min="1"
-                max="10"
-                value={aiRules.priority || 1}
-                onChange={(e) => handleAiRulesChange("priority", parseInt(e.target.value))}
-              />
-            </div>
-          )}
         </div>
       </div>
     </motion.div>
