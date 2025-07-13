@@ -5,13 +5,14 @@ import Builder from "@/components/pages/Builder";
 import SiteCreate from "@/components/pages/SiteCreate";
 import Templates from "@/components/pages/Templates";
 import Settings from "@/components/pages/Settings";
-
+import Preview from "@/components/pages/Preview";
 function App() {
   return (
     <div className="App">
-      <Routes>
+<Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/builder/:siteId" element={<Builder />} />
+        <Route path="/preview/:siteId" element={<Preview />} />
         <Route path="/sites/new" element={<SiteCreate />} />
         <Route path="/templates" element={<Templates />} />
         <Route path="/settings" element={<Settings />} />
