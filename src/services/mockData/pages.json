@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "siteId": 1,
+    "title": "Home",
+    "slug": "home",
+    "order": 1,
+    "isDefault": true
+  },
+  {
+    "Id": 2,
+    "siteId": 1,
+    "title": "Services",
+    "slug": "services",
+    "order": 2,
+    "isDefault": false
+  },
+  {
+    "Id": 3,
+    "siteId": 1,
+    "title": "Contact",
+    "slug": "contact",
+    "order": 3,
+    "isDefault": false
+  },
+  {
+    "Id": 4,
+    "siteId": 2,
+    "title": "Welcome",
+    "slug": "home",
+    "order": 1,
+    "isDefault": true
+  },
+  {
+    "Id": 5,
+    "siteId": 2,
+    "title": "Menu",
+    "slug": "menu",
+    "order": 2,
+    "isDefault": false
+  },
+  {
+    "Id": 6,
+    "siteId": 3,
+    "title": "Home",
+    "slug": "home",
+    "order": 1,
+    "isDefault": true
+  }
+]

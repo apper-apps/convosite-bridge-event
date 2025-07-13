@@ -1,0 +1,47 @@
+[
+  {
+    "Id": 1,
+    "name": "TechCorp Landing",
+    "domain": "techcorp.convosite.com",
+    "aiPrompt": "You are a helpful assistant representing TechCorp, a leading technology company. Guide visitors through our services and answer questions about our products.",
+    "aiContext": "TechCorp specializes in cloud solutions, AI development, and digital transformation. We serve enterprise clients globally with cutting-edge technology solutions.",
+    "theme": {
+      "primaryColor": "#6366F1",
+      "secondaryColor": "#8B5CF6",
+      "fontFamily": "Inter"
+    },
+    "published": true,
+    "createdAt": "2024-01-15T10:30:00Z",
+    "updatedAt": "2024-01-20T14:45:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Restaurant Bella",
+    "domain": "bella.convosite.com",
+    "aiPrompt": "You are the friendly host of Restaurant Bella, an upscale Italian restaurant. Help customers learn about our menu, make reservations, and discover our chef's specialties.",
+    "aiContext": "Restaurant Bella offers authentic Italian cuisine with fresh ingredients. Our chef Marco has 20 years of experience. We're open Tuesday-Sunday, 5-11 PM.",
+    "theme": {
+      "primaryColor": "#DC2626",
+      "secondaryColor": "#F59E0B",
+      "fontFamily": "Playfair Display"
+    },
+    "published": false,
+    "createdAt": "2024-01-18T09:15:00Z",
+    "updatedAt": "2024-01-22T16:20:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "FitLife Gym",
+    "domain": "fitlife.convosite.com",
+    "aiPrompt": "You are a fitness coach from FitLife Gym. Help visitors learn about memberships, classes, and create personalized workout plans.",
+    "aiContext": "FitLife Gym offers 24/7 access, group classes, personal training, and state-of-the-art equipment. We focus on holistic wellness and community building.",
+    "theme": {
+      "primaryColor": "#059669",
+      "secondaryColor": "#3B82F6",
+      "fontFamily": "Inter"
+    },
+    "published": true,
+    "createdAt": "2024-01-20T11:00:00Z",
+    "updatedAt": "2024-01-25T13:30:00Z"
+  }
+]

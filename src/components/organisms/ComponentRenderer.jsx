@@ -1,0 +1,217 @@
+import { motion } from "framer-motion";
+import Button from "@/components/atoms/Button";
+import ApperIcon from "@/components/ApperIcon";
+
+const ComponentRenderer = ({ component }) => {
+  const { type, content } = component;
+
+  const renderComponent = () => {
+    switch (type) {
+      case "hero":
+        return (
+          <div className="relative bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg p-8 md:p-12 text-center">
+            {content.backgroundImage && (
+              <div className="absolute inset-0 rounded-lg overflow-hidden">
+                <img 
+                  src={content.backgroundImage} 
+                  alt="Hero background"
+                  className="w-full h-full object-cover opacity-30"
+                />
+              </div>
+            )}
+            <div className="relative z-10">
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">
+                {content.title}
+              </h1>
+              {content.subtitle && (
+                <h2 className="text-xl md:text-2xl text-slate-300 mb-6">
+                  {content.subtitle}
+                </h2>
+              )}
+              {content.description && (
+                <p className="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
+                  {content.description}
+                </p>
+              )}
+              {content.buttonText && (
+                <Button size="lg" className="gradient-bg">
+                  {content.buttonText}
+                </Button>
+              )}
+            </div>
+          </div>
+        );
+
+      case "text":
+        return (
+          <div className="bg-surface/50 rounded-lg p-6">
+            <div className="prose prose-invert max-w-none">
+              <p className="text-slate-300 leading-relaxed">
+                {content.content}
+              </p>
+            </div>
+          </div>
+        );
+
+      case "image":
+        return (
+          <div className="bg-surface/50 rounded-lg p-6">
+            <img 
+              src={content.src} 
+              alt={content.alt}
+              className="w-full rounded-lg"
+            />
+            {content.caption && (
+              <p className="text-sm text-slate-400 mt-3 text-center">
+                {content.caption}
+              </p>
+            )}
+          </div>
+        );
+
+      case "features":
+        return (
+          <div className="bg-surface/50 rounded-lg p-6">
+            {content.title && (
+              <h3 className="text-2xl font-bold text-white mb-8 text-center">
+                {content.title}
+              </h3>
+            )}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {content.features?.map((feature, index) => (
+                <div key={index} className="text-center">
+                  <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <ApperIcon name={feature.icon} size={24} className="text-primary" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-white mb-2">
+                    {feature.title}
+                  </h4>
+                  <p className="text-slate-400">
+                    {feature.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case "cta":
+        return (
+          <div className="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg p-8 text-center">
+            <h3 className="text-2xl font-bold text-white mb-4">
+              {content.title}
+            </h3>
+            {content.description && (
+              <p className="text-slate-300 mb-6">
+                {content.description}
+              </p>
+            )}
+            <Button size="lg" variant={content.variant || "primary"}>
+              {content.buttonText}
+            </Button>
+          </div>
+        );
+
+      case "contact":
+        return (
+          <div className="bg-surface/50 rounded-lg p-6">
+            <h3 className="text-2xl font-bold text-white mb-4">
+              {content.title}
+            </h3>
+            {content.description && (
+              <p className="text-slate-400 mb-6">
+                {content.description}
+              </p>
+            )}
+            <div className="space-y-4">
+              {content.fields?.includes("name") && (
+                <input 
+                  type="text" 
+                  placeholder="Your Name"
+                  className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white"
+                />
+              )}
+              {content.fields?.includes("email") && (
+                <input 
+                  type="email" 
+                  placeholder="Your Email"
+                  className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white"
+                />
+              )}
+              {content.fields?.includes("message") && (
+                <textarea 
+                  placeholder="Your Message"
+                  rows={4}
+                  className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white resize-none"
+                />
+              )}
+              <Button className="gradient-bg">
+                Send Message
+              </Button>
+            </div>
+          </div>
+        );
+
+      case "testimonial":
+        return (
+          <div className="bg-surface/50 rounded-lg p-6">
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                <img 
+                  src={content.avatar} 
+                  alt={content.author}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <blockquote className="text-lg text-slate-300 italic mb-4">
+                "{content.quote}"
+              </blockquote>
+              <div>
+                <p className="font-semibold text-white">{content.author}</p>
+                <p className="text-sm text-slate-400">{content.position}</p>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "gallery":
+        return (
+          <div className="bg-surface/50 rounded-lg p-6">
+            {content.title && (
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">
+                {content.title}
+              </h3>
+            )}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {content.images?.map((image, index) => (
+                <img 
+                  key={index}
+                  src={image.src} 
+                  alt={image.alt}
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              ))}
+            </div>
+          </div>
+        );
+
+      default:
+        return (
+          <div className="bg-surface/50 rounded-lg p-6 text-center">
+            <p className="text-slate-400">Unknown component type: {type}</p>
+          </div>
+        );
+    }
+  };
+
+  return (
+    <motion.div
+      whileHover={{ scale: 1.01 }}
+      transition={{ duration: 0.2 }}
+    >
+      {renderComponent()}
+    </motion.div>
+  );
+};
+
+export default ComponentRenderer;

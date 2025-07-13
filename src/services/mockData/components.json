@@ -1,0 +1,72 @@
+[
+  {
+    "Id": 1,
+    "pageId": 1,
+    "type": "hero",
+    "content": {
+      "title": "Welcome to TechCorp",
+      "subtitle": "Leading the Future of Technology",
+      "description": "We transform businesses through innovative cloud solutions and AI-powered development.",
+      "buttonText": "Learn More",
+      "backgroundImage": "/api/placeholder/1200/600"
+    },
+    "aiEnabled": true,
+    "aiTriggerRules": {
+      "showWhen": "user asks about company or services",
+      "keywords": ["company", "about", "services", "what do you do"],
+      "priority": 1
+    },
+    "position": 1
+  },
+  {
+    "Id": 2,
+    "pageId": 1,
+    "type": "features",
+    "content": {
+      "title": "Our Core Services",
+      "features": [
+        {
+          "icon": "Cloud",
+          "title": "Cloud Solutions",
+          "description": "Scalable cloud infrastructure and migration services"
+        },
+        {
+          "icon": "Brain",
+          "title": "AI Development",
+          "description": "Custom AI solutions and machine learning models"
+        },
+        {
+          "icon": "Zap",
+          "title": "Digital Transformation",
+          "description": "Complete business process modernization"
+        }
+      ]
+    },
+    "aiEnabled": true,
+    "aiTriggerRules": {
+      "showWhen": "user asks about specific services",
+      "keywords": ["cloud", "AI", "digital transformation", "services"],
+      "priority": 2
+    },
+    "position": 2
+  },
+  {
+    "Id": 3,
+    "pageId": 4,
+    "type": "hero",
+    "content": {
+      "title": "Benvenuti a Restaurant Bella",
+      "subtitle": "Authentic Italian Cuisine",
+      "description": "Experience the finest Italian flavors crafted with passion and tradition.",
+      "buttonText": "View Menu",
+      "backgroundImage": "/api/placeholder/1200/600"
+    },
+    "aiEnabled": true,
+    "aiTriggerRules": {
+      "showWhen": "user greets or asks about restaurant",
+      "keywords": ["hello", "restaurant", "food", "menu"],
+      "priority": 1
+    },
+    "position": 1
+  }
+]
