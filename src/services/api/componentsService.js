@@ -32,16 +32,10 @@ async getById(id) {
     const pageComponents = this.components.filter(c => c.pageId === componentData.pageId);
     const nextPosition = pageComponents.length > 0 ? Math.max(...pageComponents.map(c => c.position)) + 1 : 1;
     
-    const newComponent = {
+const newComponent = {
       Id: newId,
       ...componentData,
-      position: nextPosition,
-      aiEnabled: false,
-      aiTriggerRules: {
-        showWhen: "",
-        keywords: [],
-        priority: 1
-      }
+      position: nextPosition
     };
     
     this.components.push(newComponent);
@@ -82,23 +76,6 @@ async getById(id) {
     return this.getByPageId(pageId);
   }
 
-  async updateAiRules(id, aiRules) {
-    await this.delay(300);
-    return this.update(id, { 
-      aiEnabled: true,
-      aiTriggerRules: aiRules 
-    });
-  }
-
-async toggleAiEnabled(id) {
-    await this.delay(250);
-    const component = this.components.find(c => c.Id === parseInt(id));
-    if (!component) {
-      throw new Error(`Component with ID ${id} not found`);
-    }
-    
-    return this.update(id, { aiEnabled: !component.aiEnabled });
-  }
 }
 
 export default new ComponentsService();

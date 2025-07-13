@@ -22,15 +22,9 @@ const BuilderCanvas = ({
     drop: (item, monitor) => {
       if (monitor.didDrop()) return;
       
-      const newComponent = {
+const newComponent = {
         type: item.type,
-        content: getDefaultContent(item.type),
-        aiEnabled: false,
-        aiTriggerRules: {
-          showWhen: "",
-          keywords: [],
-          priority: 1
-        }
+        content: getDefaultContent(item.type)
       };
       
       onAddComponent(newComponent);
