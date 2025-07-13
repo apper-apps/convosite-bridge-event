@@ -17,7 +17,7 @@ class ComponentsService {
       .map(c => ({ ...c }));
   }
 
-  async getById(id) {
+async getById(id) {
     await this.delay();
     const component = this.components.find(c => c.Id === parseInt(id));
     if (!component) {
@@ -90,7 +90,7 @@ class ComponentsService {
     });
   }
 
-  async toggleAiEnabled(id) {
+async toggleAiEnabled(id) {
     await this.delay(250);
     const component = this.components.find(c => c.Id === parseInt(id));
     if (!component) {

@@ -69,8 +69,11 @@ const Builder = () => {
     }
   };
 
-  const handleAddComponent = async (componentData) => {
-    if (!currentPage) return;
+const handleAddComponent = async (componentData) => {
+    if (!currentPage) {
+      toast.error("No page selected");
+      return;
+    }
     
     try {
       const newComponent = await componentsService.create({
@@ -80,30 +83,31 @@ const Builder = () => {
       setComponents(prev => [...prev, newComponent]);
       toast.success("Component added successfully");
     } catch (err) {
-      toast.error("Failed to add component");
+      toast.error(`Failed to add component: ${err.message}`);
       console.error("Error adding component:", err);
     }
   };
 
-  const handleUpdateComponent = async (componentId, updates) => {
+const handleUpdateComponent = async (componentId, updates) => {
     try {
       const updatedComponent = await componentsService.update(componentId, updates);
       setComponents(prev => 
         prev.map(c => c.Id === componentId ? updatedComponent : c)
       );
+      toast.success("Component updated successfully");
     } catch (err) {
-      toast.error("Failed to update component");
+      toast.error(`Failed to update component: ${err.message}`);
       console.error("Error updating component:", err);
     }
   };
 
-  const handleDeleteComponent = async (componentId) => {
+const handleDeleteComponent = async (componentId) => {
     try {
       await componentsService.delete(componentId);
       setComponents(prev => prev.filter(c => c.Id !== componentId));
       toast.success("Component deleted successfully");
     } catch (err) {
-      toast.error("Failed to delete component");
+      toast.error(`Failed to delete component: ${err.message}`);
       console.error("Error deleting component:", err);
     }
   };

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import Button from "@/components/atoms/Button";
+import React from "react";
 import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
 
 const ComponentRenderer = ({ component }) => {
   const { type, content } = component;
@@ -10,12 +11,15 @@ const ComponentRenderer = ({ component }) => {
       case "hero":
         return (
           <div className="relative bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg p-8 md:p-12 text-center">
-            {content.backgroundImage && (
+{content.backgroundImage && (
               <div className="absolute inset-0 rounded-lg overflow-hidden">
                 <img 
                   src={content.backgroundImage} 
                   alt="Hero background"
                   className="w-full h-full object-cover opacity-30"
+                  onError={(e) => {
+                    e.target.src = "https://via.placeholder.com/1200x600/1e293b/64748b?text=Hero+Background";
+                  }}
                 />
               </div>
             )}
@@ -53,13 +57,16 @@ const ComponentRenderer = ({ component }) => {
           </div>
         );
 
-      case "image":
+case "image":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
             <img 
               src={content.src} 
-              alt={content.alt}
+              alt={content.alt || "Image"}
               className="w-full rounded-lg"
+              onError={(e) => {
+                e.target.src = "https://via.placeholder.com/800x400/1e293b/64748b?text=Image+Not+Found";
+              }}
             />
             {content.caption && (
               <p className="text-sm text-slate-400 mt-3 text-center">
@@ -156,11 +163,14 @@ const ComponentRenderer = ({ component }) => {
         return (
           <div className="bg-surface/50 rounded-lg p-6">
             <div className="text-center">
-              <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+<div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
                 <img 
                   src={content.avatar} 
-                  alt={content.author}
+                  alt={content.author || "Avatar"}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.src = "https://via.placeholder.com/64x64/1e293b/64748b?text=Avatar";
+                  }}
                 />
               </div>
               <blockquote className="text-lg text-slate-300 italic mb-4">
@@ -182,17 +192,19 @@ const ComponentRenderer = ({ component }) => {
                 {content.title}
               </h3>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {content.images?.map((image, index) => (
                 <img 
                   key={index}
                   src={image.src} 
-                  alt={image.alt}
+                  alt={image.alt || `Gallery image ${index + 1}`}
                   className="w-full h-48 object-cover rounded-lg"
+                  onError={(e) => {
+                    e.target.src = "https://via.placeholder.com/400x300/1e293b/64748b?text=Gallery+Image";
+                  }}
                 />
               ))}
             </div>
-          </div>
         );
 
       default:

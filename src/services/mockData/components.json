@@ -8,7 +8,7 @@
       "subtitle": "Leading the Future of Technology",
       "description": "We transform businesses through innovative cloud solutions and AI-powered development.",
       "buttonText": "Learn More",
-      "backgroundImage": "/api/placeholder/1200/600"
+      "backgroundImage": "https://via.placeholder.com/1200x600/2563eb/ffffff?text=TechCorp+Hero"
     },
     "aiEnabled": true,
     "aiTriggerRules": {
@@ -59,7 +59,7 @@
       "subtitle": "Authentic Italian Cuisine",
       "description": "Experience the finest Italian flavors crafted with passion and tradition.",
       "buttonText": "View Menu",
-      "backgroundImage": "/api/placeholder/1200/600"
+      "backgroundImage": "https://via.placeholder.com/1200x600/8b5cf6/ffffff?text=Restaurant+Bella"
     },
     "aiEnabled": true,
     "aiTriggerRules": {
