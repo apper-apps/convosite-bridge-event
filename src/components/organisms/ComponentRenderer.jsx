@@ -184,7 +184,7 @@ case "image":
           </div>
         );
 
-      case "gallery":
+case "gallery":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
             {content.title && (
@@ -192,7 +192,7 @@ case "image":
                 {content.title}
               </h3>
             )}
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {content.images?.map((image, index) => (
                 <img 
                   key={index}
@@ -205,6 +205,7 @@ case "image":
                 />
               ))}
             </div>
+          </div>
         );
 
       default:
