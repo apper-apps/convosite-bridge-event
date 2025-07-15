@@ -173,10 +173,11 @@ const newComponent = {
                 ))}
               </div>
             </AnimatePresence>
-          )}
+)}
         </div>
       </div>
-{/* Component Editor Sidebar */}
+
+      {/* Component Editor Sidebar */}
       {selectedComponent && (
         <ComponentEditor
           component={selectedComponent}
@@ -184,8 +185,7 @@ const newComponent = {
           onClose={() => setSelectedComponent(null)}
         />
       )}
-</div>
+    </div>
   );
-};
 
 export default BuilderCanvas;
