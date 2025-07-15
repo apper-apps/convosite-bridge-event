@@ -19,10 +19,10 @@ const BuilderCanvas = ({
 
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "component",
-    drop: (item, monitor) => {
+drop: (item, monitor) => {
       if (monitor.didDrop()) return;
       
-const newComponent = {
+      const newComponent = {
         type: item.type,
         content: getDefaultContent(item.type)
       };
@@ -98,13 +98,12 @@ const newComponent = {
     setSelectedComponent(prev => prev ? { ...prev, ...updates } : null);
   };
 
-  const handleDeleteComponent = (componentId) => {
+const handleDeleteComponent = (componentId) => {
     onDeleteComponent(componentId);
-    if (selectedComponent?.Id === componentId) {
+    if (selectedComponent?.id === componentId) {
       setSelectedComponent(null);
     }
   };
-
   return (
     <div className="flex-1 flex">
       {/* Canvas Area */}
@@ -125,15 +124,15 @@ const newComponent = {
           ) : (
             <AnimatePresence>
               <div className="space-y-4">
-                {components.map((component, index) => (
+{components.map((component, index) => (
                   <motion.div
-                    key={component.Id}
+                    key={component.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.2 }}
                     className={`relative group border-2 border-transparent rounded-lg transition-all duration-200 ${
-                      selectedComponent?.Id === component.Id 
+                      selectedComponent?.id === component.id 
                         ? "border-primary shadow-lg shadow-primary/20" 
                         : "hover:border-slate-600"
                     }`}
@@ -157,15 +156,15 @@ const newComponent = {
                         <Button
                           size="sm"
                           variant="ghost"
-                          onClick={(e) => {
+onClick={(e) => {
                             e.stopPropagation();
-                            handleDeleteComponent(component.Id);
+                            handleDeleteComponent(component.id);
                           }}
                           className="h-8 w-8 p-0 hover:text-error"
                         >
                           <ApperIcon name="Trash2" size={14} />
                         </Button>
-</div>
+                      </div>
                     </div>
 
                     <ComponentRenderer component={component} />
