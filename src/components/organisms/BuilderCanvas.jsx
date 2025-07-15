@@ -17,9 +17,9 @@ const BuilderCanvas = ({
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [draggedOverIndex, setDraggedOverIndex] = useState(null);
 
-  const [{ isOver }, drop] = useDrop(() => ({
+const [{ isOver }, drop] = useDrop(() => ({
     accept: "component",
-drop: (item, monitor) => {
+    drop: (item, monitor) => {
       if (monitor.didDrop()) return;
       
       const newComponent = {
@@ -122,9 +122,9 @@ const handleDeleteComponent = (componentId) => {
               className="min-h-[60vh]"
             />
           ) : (
-            <AnimatePresence>
+<AnimatePresence>
               <div className="space-y-4">
-{components.map((component, index) => (
+                {components.map((component, index) => (
                   <motion.div
                     key={component.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -156,7 +156,7 @@ const handleDeleteComponent = (componentId) => {
                         <Button
                           size="sm"
                           variant="ghost"
-onClick={(e) => {
+                          onClick={(e) => {
                             e.stopPropagation();
                             handleDeleteComponent(component.id);
                           }}
@@ -172,7 +172,7 @@ onClick={(e) => {
                 ))}
               </div>
             </AnimatePresence>
-)}
+          )}
         </div>
       </div>
 
@@ -184,7 +184,8 @@ onClick={(e) => {
           onClose={() => setSelectedComponent(null)}
         />
       )}
-    </div>
+</div>
   );
+};
 
 export default BuilderCanvas;
