@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
-import { motion, AnimatePresence } from "framer-motion";
-import Button from "@/components/atoms/Button";
+import { AnimatePresence, motion } from "framer-motion";
 import ApperIcon from "@/components/ApperIcon";
-import ComponentRenderer from "@/components/organisms/ComponentRenderer";
 import ComponentEditor from "@/components/organisms/ComponentEditor";
+import ComponentRenderer from "@/components/organisms/ComponentRenderer";
+import Button from "@/components/atoms/Button";
 import Empty from "@/components/ui/Empty";
 
 const BuilderCanvas = ({ 
@@ -176,8 +176,7 @@ const newComponent = {
           )}
         </div>
       </div>
-
-      {/* Component Editor Sidebar */}
+{/* Component Editor Sidebar */}
       {selectedComponent && (
         <ComponentEditor
           component={selectedComponent}
@@ -185,7 +184,7 @@ const newComponent = {
           onClose={() => setSelectedComponent(null)}
         />
       )}
-    </div>
+</div>
   );
 };
 
