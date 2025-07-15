@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import Header from "@/components/organisms/Header";
 import ComponentLibrary from "@/components/organisms/ComponentLibrary";
 import BuilderCanvas from "@/components/organisms/BuilderCanvas";
-import ChatPreview from "@/components/organisms/ChatPreview";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Button from "@/components/atoms/Button";
@@ -225,13 +224,7 @@ const handleDeleteComponent = async (componentId) => {
           components={components}
           onAddComponent={handleAddComponent}
           onUpdateComponent={handleUpdateComponent}
-          onDeleteComponent={handleDeleteComponent}
-        />
-        
-        <ChatPreview
-          site={site}
-          currentPage={currentPage}
-          components={components}
+onDeleteComponent={handleDeleteComponent}
         />
       </div>
     </div>
