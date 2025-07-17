@@ -1,17 +1,16 @@
-import { motion } from "framer-motion";
-import React from "react";
-import ApperIcon from "@/components/ApperIcon";
-import Button from "@/components/atoms/Button";
+import { motion } from 'framer-motion'
+import React from 'react'
+import ApperIcon from '@/components/ApperIcon'
+import Button from '@/components/atoms/Button'
 
-const ComponentRenderer = ({ component }) => {
-  const { type, content } = component;
-
-  const renderComponent = () => {
+const ComponentRenderer = ({ component = {} }) => {
+  const { type = 'text', content = {} } = component;
+const renderComponent = () => {
     switch (type) {
       case "hero":
         return (
           <div className="relative bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg p-8 md:p-12 text-center">
-{content.backgroundImage && (
+            {content?.backgroundImage && (
               <div className="absolute inset-0 rounded-lg overflow-hidden">
                 <img 
                   src={content.backgroundImage} 
@@ -25,19 +24,19 @@ const ComponentRenderer = ({ component }) => {
             )}
             <div className="relative z-10">
               <h1 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">
-                {content.title}
+                {content?.title || 'Default Title'}
               </h1>
-              {content.subtitle && (
+              {content?.subtitle && (
                 <h2 className="text-xl md:text-2xl text-slate-300 mb-6">
                   {content.subtitle}
                 </h2>
               )}
-              {content.description && (
+              {content?.description && (
                 <p className="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
                   {content.description}
                 </p>
               )}
-              {content.buttonText && (
+              {content?.buttonText && (
                 <Button size="lg" className="gradient-bg">
                   {content.buttonText}
                 </Button>
@@ -46,12 +45,12 @@ const ComponentRenderer = ({ component }) => {
           </div>
         );
 
-      case "text":
+case "text":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
             <div className="prose prose-invert max-w-none">
               <p className="text-slate-300 leading-relaxed">
-                {content.content}
+                {content?.content || 'Default content'}
               </p>
             </div>
           </div>
@@ -61,14 +60,14 @@ case "image":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
             <img 
-              src={content.src} 
-              alt={content.alt || "Image"}
+              src={content?.src || "https://via.placeholder.com/800x400/1e293b/64748b?text=Image+Not+Found"} 
+              alt={content?.alt || "Image"}
               className="w-full rounded-lg"
               onError={(e) => {
                 e.target.src = "https://via.placeholder.com/800x400/1e293b/64748b?text=Image+Not+Found";
               }}
             />
-            {content.caption && (
+            {content?.caption && (
               <p className="text-sm text-slate-400 mt-3 text-center">
                 {content.caption}
               </p>
@@ -76,76 +75,80 @@ case "image":
           </div>
         );
 
-      case "features":
+case "features":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
-            {content.title && (
+            {content?.title && (
               <h3 className="text-2xl font-bold text-white mb-8 text-center">
                 {content.title}
               </h3>
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {content.features?.map((feature, index) => (
+              {content?.features?.map((feature, index) => (
                 <div key={index} className="text-center">
                   <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <ApperIcon name={feature.icon} size={24} className="text-primary" />
+                    <ApperIcon name={feature?.icon || 'Star'} size={24} className="text-primary" />
                   </div>
                   <h4 className="text-lg font-semibold text-white mb-2">
-                    {feature.title}
+                    {feature?.title || 'Feature'}
                   </h4>
                   <p className="text-slate-400">
-                    {feature.description}
+                    {feature?.description || 'Feature description'}
                   </p>
                 </div>
-              ))}
+              )) || (
+                <div className="col-span-full text-center text-slate-400">
+                  No features available
+                </div>
+              )}
             </div>
           </div>
         );
 
-      case "cta":
+case "cta":
         return (
           <div className="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg p-8 text-center">
             <h3 className="text-2xl font-bold text-white mb-4">
-              {content.title}
+              {content?.title || 'Call to Action'}
             </h3>
-            {content.description && (
+            {content?.description && (
               <p className="text-slate-300 mb-6">
                 {content.description}
               </p>
             )}
-            <Button size="lg" variant={content.variant || "primary"}>
-              {content.buttonText}
+            <Button size="lg" variant={content?.variant || "primary"}>
+              {content?.buttonText || 'Get Started'}
             </Button>
           </div>
         );
 
-      case "contact":
+case "contact":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
             <h3 className="text-2xl font-bold text-white mb-4">
-              {content.title}
+              {content?.title || 'Contact Us'}
             </h3>
-            {content.description && (
+            {content?.description && (
               <p className="text-slate-400 mb-6">
                 {content.description}
               </p>
             )}
             <div className="space-y-4">
-              {content.fields?.includes("name") && (
+              {content?.fields?.includes("name") && (
                 <input 
                   type="text" 
                   placeholder="Your Name"
                   className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white"
                 />
               )}
-              {content.fields?.includes("email") && (
+              {content?.fields?.includes("email") && (
                 <input 
                   type="email" 
                   placeholder="Your Email"
                   className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white"
                 />
               )}
-              {content.fields?.includes("message") && (
+              {content?.fields?.includes("message") && (
                 <textarea 
                   placeholder="Your Message"
                   rows={4}
@@ -159,14 +162,14 @@ case "image":
           </div>
         );
 
-      case "testimonial":
+case "testimonial":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
             <div className="text-center">
-<div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+              <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
                 <img 
-                  src={content.avatar} 
-                  alt={content.author || "Avatar"}
+                  src={content?.avatar || "https://via.placeholder.com/64x64/1e293b/64748b?text=Avatar"} 
+                  alt={content?.author || "Avatar"}
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.target.src = "https://via.placeholder.com/64x64/1e293b/64748b?text=Avatar";
@@ -174,11 +177,11 @@ case "image":
                 />
               </div>
               <blockquote className="text-lg text-slate-300 italic mb-4">
-                "{content.quote}"
+                "{content?.quote || 'Customer testimonial'}"
               </blockquote>
               <div>
-                <p className="font-semibold text-white">{content.author}</p>
-                <p className="text-sm text-slate-400">{content.position}</p>
+                <p className="font-semibold text-white">{content?.author || 'Anonymous'}</p>
+                <p className="text-sm text-slate-400">{content?.position || 'Customer'}</p>
               </div>
             </div>
           </div>
@@ -187,23 +190,27 @@ case "image":
 case "gallery":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
-            {content.title && (
+            {content?.title && (
               <h3 className="text-2xl font-bold text-white mb-6 text-center">
                 {content.title}
               </h3>
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {content.images?.map((image, index) => (
+              {content?.images?.map((image, index) => (
                 <img 
                   key={index}
-                  src={image.src} 
-                  alt={image.alt || `Gallery image ${index + 1}`}
+                  src={image?.src || "https://via.placeholder.com/400x300/1e293b/64748b?text=Gallery+Image"} 
+                  alt={image?.alt || `Gallery image ${index + 1}`}
                   className="w-full h-48 object-cover rounded-lg"
                   onError={(e) => {
                     e.target.src = "https://via.placeholder.com/400x300/1e293b/64748b?text=Gallery+Image";
                   }}
                 />
-              ))}
+              )) || (
+                <div className="col-span-full text-center text-slate-400">
+                  No images available
+                </div>
+              )}
             </div>
           </div>
         );
