@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
-import React from 'react'
-import ApperIcon from '@/components/ApperIcon'
-import Button from '@/components/atoms/Button'
+import { motion } from "framer-motion";
+import React from "react";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
 
 const ComponentRenderer = ({ component = {} }) => {
   const { type = 'text', content = {} } = component;
@@ -79,22 +79,21 @@ case "features":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
             {content?.title && (
-              <h3 className="text-2xl font-bold text-white mb-8 text-center">
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">
                 {content.title}
               </h3>
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {content?.features?.map((feature, index) => (
-                <div key={index} className="text-center">
-                  <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <ApperIcon name={feature?.icon || 'Star'} size={24} className="text-primary" />
+                <div
+                  key={`feature-${feature.title}-${index}`}
+                  className="text-center p-6 rounded-lg bg-surface/50 border border-white/10"
+                >
+                  <div className="w-12 h-12 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
+                    <ApperIcon name={feature.icon} className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-2">
-                    {feature?.title || 'Feature'}
-                  </h4>
-                  <p className="text-slate-400">
-                    {feature?.description || 'Feature description'}
-                  </p>
+                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-400 text-sm">{feature.description}</p>
                 </div>
               )) || (
                 <div className="col-span-full text-center text-slate-400">
@@ -105,7 +104,7 @@ case "features":
           </div>
         );
 
-case "cta":
+      case "cta":
         return (
           <div className="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg p-8 text-center">
             <h3 className="text-2xl font-bold text-white mb-4">
@@ -122,42 +121,59 @@ case "cta":
           </div>
         );
 
-case "contact":
+      case "contact":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              {content?.title || 'Contact Us'}
-            </h3>
-            {content?.description && (
-              <p className="text-slate-400 mb-6">
-                {content.description}
-              </p>
+            {content?.title && (
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">
+                {content.title}
+              </h3>
             )}
-            <div className="space-y-4">
-              {content?.fields?.includes("name") && (
-                <input 
-                  type="text" 
-                  placeholder="Your Name"
-                  className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white"
-                />
-              )}
-              {content?.fields?.includes("email") && (
-                <input 
-                  type="email" 
-                  placeholder="Your Email"
-                  className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white"
-                />
-              )}
-              {content?.fields?.includes("message") && (
-                <textarea 
-                  placeholder="Your Message"
-                  rows={4}
-                  className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white resize-none"
-                />
-              )}
-              <Button className="gradient-bg">
-                Send Message
-              </Button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="text-lg font-semibold mb-4">Get in Touch</h4>
+                <div className="space-y-4">
+                  {content?.email && (
+                    <div className="flex items-center gap-3">
+                      <ApperIcon name="mail" className="w-5 h-5 text-primary" />
+                      <span className="text-slate-300">{content.email}</span>
+                    </div>
+                  )}
+                  {content?.phone && (
+                    <div className="flex items-center gap-3">
+                      <ApperIcon name="phone" className="w-5 h-5 text-primary" />
+                      <span className="text-slate-300">{content.phone}</span>
+                    </div>
+                  )}
+                  {content?.address && (
+                    <div className="flex items-center gap-3">
+                      <ApperIcon name="map-pin" className="w-5 h-5 text-primary" />
+                      <span className="text-slate-300">{content.address}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-4">Send Message</h4>
+                <form className="space-y-4">
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white"
+                  />
+                  <textarea
+                    placeholder="Your Message"
+                    rows={4}
+                    className="w-full p-3 bg-background border border-slate-600 rounded-lg text-white resize-none"
+                  />
+                  <Button className="gradient-bg w-full">Send Message</Button>
+                </form>
+              </div>
             </div>
           </div>
         );

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { AnimatePresence, motion } from "framer-motion";
 import ApperIcon from "@/components/ApperIcon";
-import ComponentEditor from "@/components/organisms/ComponentEditor";
-import ComponentRenderer from "@/components/organisms/ComponentRenderer";
-import Button from "@/components/atoms/Button";
 import Empty from "@/components/ui/Empty";
+import ComponentRenderer from "@/components/organisms/ComponentRenderer";
+import ComponentEditor from "@/components/organisms/ComponentEditor";
+import Button from "@/components/atoms/Button";
 
 const BuilderCanvas = ({ 
   components = [], 
@@ -51,30 +51,13 @@ const [{ isOver }, drop] = useDrop(() => ({
         alt: "Placeholder image",
         caption: "Image caption"
       },
-      features: {
+features: {
         title: "Key Features",
         features: [
           { icon: "Star", title: "Feature 1", description: "Description of feature 1" },
           { icon: "Zap", title: "Feature 2", description: "Description of feature 2" },
           { icon: "Shield", title: "Feature 3", description: "Description of feature 3" }
         ]
-      },
-      cta: {
-        title: "Ready to Get Started?",
-        description: "Take action now and see the difference.",
-        buttonText: "Call to Action",
-        variant: "primary"
-      },
-      contact: {
-        title: "Get in Touch",
-        description: "We'd love to hear from you.",
-        fields: ["name", "email", "message"]
-      },
-      testimonial: {
-        quote: "This is an amazing service that has transformed our business.",
-        author: "John Doe",
-        position: "CEO, Company Name",
-        avatar: "/api/placeholder/60/60"
       },
       gallery: {
         title: "Gallery",
