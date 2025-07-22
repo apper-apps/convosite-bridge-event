@@ -54,17 +54,17 @@ const [{ isOver }, drop] = useDrop(() => ({
 features: {
         title: "Key Features",
         features: [
-          { icon: "Star", title: "Feature 1", description: "Description of feature 1" },
-          { icon: "Zap", title: "Feature 2", description: "Description of feature 2" },
-          { icon: "Shield", title: "Feature 3", description: "Description of feature 3" }
+          { id: "feature-1", icon: "Star", title: "Feature 1", description: "Description of feature 1" },
+          { id: "feature-2", icon: "Zap", title: "Feature 2", description: "Description of feature 2" },
+          { id: "feature-3", icon: "Shield", title: "Feature 3", description: "Description of feature 3" }
         ]
       },
       gallery: {
         title: "Gallery",
         images: [
-          { src: "/api/placeholder/300/200", alt: "Gallery image 1" },
-          { src: "/api/placeholder/300/200", alt: "Gallery image 2" },
-          { src: "/api/placeholder/300/200", alt: "Gallery image 3" }
+          { id: "gallery-1", src: "/api/placeholder/300/200", alt: "Gallery image 1" },
+          { id: "gallery-2", src: "/api/placeholder/300/200", alt: "Gallery image 2" },
+          { id: "gallery-3", src: "/api/placeholder/300/200", alt: "Gallery image 3" }
         ]
       }
     };
