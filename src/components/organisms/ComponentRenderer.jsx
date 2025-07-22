@@ -4,123 +4,126 @@ import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 
 const ComponentRenderer = ({ component = {} }) => {
-  const { type = 'text', content = {} } = component;
-const renderComponent = () => {
+  const { type = 'text', content = {}, ...rest } = component;
+  
+  // Ensure content is always an object with safe defaults
+  const safeContent = content || {};
+  
+  const renderComponent = () => {
     switch (type) {
-      case "hero":
+case 'hero':
         return (
-          <div className="relative bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg p-8 md:p-12 text-center">
-            {content?.backgroundImage && (
-              <div className="absolute inset-0 rounded-lg overflow-hidden">
-                <img 
-                  src={content.backgroundImage} 
-                  alt="Hero background"
-                  className="w-full h-full object-cover opacity-30"
-                  onError={(e) => {
-                    e.target.src = "https://via.placeholder.com/1200x600/1e293b/64748b?text=Hero+Background";
-                  }}
-                />
-              </div>
-            )}
-            <div className="relative z-10">
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">
-                {content?.title || 'Default Title'}
-              </h1>
-              {content?.subtitle && (
-                <h2 className="text-xl md:text-2xl text-slate-300 mb-6">
-                  {content.subtitle}
-                </h2>
-              )}
-              {content?.description && (
-                <p className="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
-                  {content.description}
-                </p>
-              )}
-              {content?.buttonText && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="relative min-h-[500px] bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-center text-white"
+            style={{
+              backgroundImage: safeContent.backgroundImage ? `url(${safeContent.backgroundImage})` : 'none',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          >
+            <div className="absolute inset-0 bg-black/40"></div>
+            <div className="relative z-10 max-w-4xl mx-auto px-6">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6">{safeContent.title || 'Welcome'}</h1>
+              <p className="text-xl md:text-2xl mb-4 text-gray-200">{safeContent.subtitle || 'Your subtitle here'}</p>
+<p className="text-lg mb-8 max-w-2xl mx-auto">{safeContent.description || 'Your description here'}</p>
+              {safeContent.buttonText && (
                 <Button size="lg" className="gradient-bg">
-                  {content.buttonText}
+                  {safeContent.buttonText}
                 </Button>
               )}
             </div>
-          </div>
+          </motion.section>
+        );
+case 'text':
+        return (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="prose prose-invert max-w-none"
+          >
+            <div dangerouslySetInnerHTML={{ __html: safeContent.content || '<p>Your text content here</p>' }} />
+          </motion.div>
         );
 
-case "text":
+      case 'image':
         return (
-          <div className="bg-surface/50 rounded-lg p-6">
-            <div className="prose prose-invert max-w-none">
-              <p className="text-slate-300 leading-relaxed">
-                {content?.content || 'Default content'}
-              </p>
-            </div>
-          </div>
-        );
-
-case "image":
-        return (
-          <div className="bg-surface/50 rounded-lg p-6">
-            <img 
-              src={content?.src || "https://via.placeholder.com/800x400/1e293b/64748b?text=Image+Not+Found"} 
-              alt={content?.alt || "Image"}
-              className="w-full rounded-lg"
-              onError={(e) => {
-                e.target.src = "https://via.placeholder.com/800x400/1e293b/64748b?text=Image+Not+Found";
-              }}
+          <motion.figure
+            initial={{ opacity: 0, scale: 0.9 }}
+animate={{ opacity: 1, scale: 1 }}
+            className="text-center"
+          >
+            <img
+              src={safeContent.src || '/api/placeholder/600/400'}
+              alt={safeContent.alt || 'Image'}
+              className="max-w-full h-auto rounded-lg shadow-lg mx-auto"
             />
-            {content?.caption && (
-              <p className="text-sm text-slate-400 mt-3 text-center">
-                {content.caption}
-              </p>
+            {safeContent.caption && (
+              <figcaption className="mt-4 text-sm text-gray-400">
+                {safeContent.caption}
+              </figcaption>
             )}
-          </div>
+          </motion.figure>
         );
-
-case "features":
+case 'features':
         return (
-          <div className="bg-surface/50 rounded-lg p-6">
-            {content?.title && (
-              <h3 className="text-2xl font-bold text-white mb-6 text-center">
-                {content.title}
-              </h3>
-)}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {content?.features?.map((feature, index) => (
-                <div
-                  key={`feature-${feature.title || 'untitled'}-${index}`}
-                  className="text-center p-6 rounded-lg bg-surface/50 border border-white/10"
-                >
-                  <div className="w-12 h-12 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
-                    <ApperIcon name={feature.icon} className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-400 text-sm">{feature.description}</p>
-                </div>
-              )) || (
-                <div className="col-span-full text-center text-slate-400">
-                  No features available
-                </div>
-              )}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="py-12"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{safeContent.title || 'Features'}</h2>
             </div>
-          </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {(safeContent.features || []).map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="text-center p-6 bg-surface/50 rounded-lg border border-slate-700"
+                >
+<div className="mb-4">
+                    <ApperIcon 
+                      name={feature?.icon || 'Star'} 
+                      size={32} 
+                      className="mx-auto text-primary" 
+                    />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{feature?.title || 'Feature'}</h3>
+                  <p className="text-gray-400">{feature?.description || 'Feature description'}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
         );
-
-      case "cta":
+case 'gallery':
         return (
-          <div className="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg p-8 text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              {content?.title || 'Call to Action'}
-            </h3>
-            {content?.description && (
-              <p className="text-slate-300 mb-6">
-                {content.description}
-              </p>
-            )}
-            <Button size="lg" variant={content?.variant || "primary"}>
-              {content?.buttonText || 'Get Started'}
-            </Button>
-          </div>
+          <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="py-12"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{safeContent.title || 'Gallery'}</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {(safeContent.images || []).map((image, index) => (
+                <motion.img
+                  key={index}
+                  src={image?.src || '/api/placeholder/400/300'}
+                  alt={image?.alt || `Gallery image ${index + 1}`}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              ))}
+            </div>
+          </motion.section>
         );
-
       case "contact":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
@@ -203,33 +206,6 @@ case "testimonial":
           </div>
         );
 
-case "gallery":
-        return (
-          <div className="bg-surface/50 rounded-lg p-6">
-            {content?.title && (
-              <h3 className="text-2xl font-bold text-white mb-6 text-center">
-                {content.title}
-              </h3>
-)}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {content?.images?.map((image, index) => (
-                <img 
-                  key={`gallery-image-${index}`}
-                  src={image?.src || "https://via.placeholder.com/400x300/1e293b/64748b?text=Gallery+Image"} 
-                  alt={image?.alt || `Gallery image ${index + 1}`}
-                  className="w-full h-48 object-cover rounded-lg"
-                  onError={(e) => {
-                    e.target.src = "https://via.placeholder.com/400x300/1e293b/64748b?text=Gallery+Image";
-                  }}
-                />
-              )) || (
-                <div className="col-span-full text-center text-slate-400">
-                  No images available
-                </div>
-              )}
-            </div>
-          </div>
-        );
 
       default:
         return (

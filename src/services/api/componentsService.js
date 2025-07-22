@@ -19,21 +19,21 @@ class ComponentsService {
 
 async getById(id) {
     await this.delay();
-    const component = this.components.find(c => c.Id === parseInt(id));
+    const component = this.components.find(c => c.id === parseInt(id));
     if (!component) {
       throw new Error(`Component with ID ${id} not found`);
     }
     return { ...component };
   }
 
-  async create(componentData) {
+async create(componentData) {
     await this.delay(400);
-    const newId = Math.max(...this.components.map(c => c.Id)) + 1;
+    const newId = Math.max(...this.components.map(c => c.id)) + 1;
     const pageComponents = this.components.filter(c => c.pageId === componentData.pageId);
     const nextPosition = pageComponents.length > 0 ? Math.max(...pageComponents.map(c => c.position)) + 1 : 1;
     
 const newComponent = {
-      Id: newId,
+      id: newId,
       ...componentData,
       position: nextPosition
     };
@@ -42,9 +42,9 @@ const newComponent = {
     return { ...newComponent };
   }
 
-  async update(id, updates) {
+async update(id, updates) {
     await this.delay(350);
-    const index = this.components.findIndex(c => c.Id === parseInt(id));
+    const index = this.components.findIndex(c => c.id === parseInt(id));
     if (index === -1) {
       throw new Error(`Component with ID ${id} not found`);
     }
@@ -53,9 +53,9 @@ const newComponent = {
     return { ...this.components[index] };
   }
 
-  async delete(id) {
+async delete(id) {
     await this.delay(250);
-    const index = this.components.findIndex(c => c.Id === parseInt(id));
+    const index = this.components.findIndex(c => c.id === parseInt(id));
     if (index === -1) {
       throw new Error(`Component with ID ${id} not found`);
     }
@@ -66,8 +66,8 @@ const newComponent = {
 
   async reorder(pageId, componentOrders) {
     await this.delay(400);
-    componentOrders.forEach(({ id, position }) => {
-      const component = this.components.find(c => c.Id === parseInt(id));
+componentOrders.forEach(({ id, position }) => {
+      const component = this.components.find(c => c.id === parseInt(id));
       if (component) {
         component.position = position;
       }

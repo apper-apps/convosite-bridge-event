@@ -1,6 +1,6 @@
 [
   {
-    "Id": 1,
+    "id": 1,
     "pageId": 1,
     "type": "hero",
     "content": {
@@ -19,7 +19,7 @@
     "position": 1
   },
   {
-    "Id": 2,
+    "id": 2,
     "pageId": 1,
     "type": "features",
     "content": {
@@ -51,7 +51,7 @@
     "position": 2
   },
   {
-    "Id": 3,
+    "id": 3,
     "pageId": 4,
     "type": "hero",
     "content": {

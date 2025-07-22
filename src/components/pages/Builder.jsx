@@ -41,8 +41,8 @@ const Builder = () => {
       if (defaultPage) {
         setCurrentPage(defaultPage);
         
-        // Load components for current page
-        const componentsData = await componentsService.getByPageId(defaultPage.Id);
+// Load components for current page
+        const componentsData = await componentsService.getByPageId(defaultPage.id);
         setComponents(componentsData);
       }
     } catch (err) {
@@ -57,10 +57,10 @@ const Builder = () => {
     loadBuilderData();
   }, [siteId]);
 
-  const handlePageChange = async (page) => {
+const handlePageChange = async (page) => {
     try {
       setCurrentPage(page);
-      const componentsData = await componentsService.getByPageId(page.Id);
+      const componentsData = await componentsService.getByPageId(page.id);
       setComponents(componentsData);
     } catch (err) {
       toast.error("Failed to load page components");
@@ -74,9 +74,9 @@ const handleAddComponent = async (componentData) => {
       return;
     }
     
-    try {
+try {
       const newComponent = await componentsService.create({
-        pageId: currentPage.Id,
+        pageId: currentPage.id,
         ...componentData
       });
       setComponents(prev => [...prev, newComponent]);
@@ -90,8 +90,8 @@ const handleAddComponent = async (componentData) => {
 const handleUpdateComponent = async (componentId, updates) => {
     try {
       const updatedComponent = await componentsService.update(componentId, updates);
-      setComponents(prev => 
-        prev.map(c => c.Id === componentId ? updatedComponent : c)
+setComponents(prev => 
+        prev.map(c => c.id === componentId ? updatedComponent : c)
       );
       toast.success("Component updated successfully");
     } catch (err) {
@@ -102,8 +102,8 @@ const handleUpdateComponent = async (componentId, updates) => {
 
 const handleDeleteComponent = async (componentId) => {
     try {
-      await componentsService.delete(componentId);
-      setComponents(prev => prev.filter(c => c.Id !== componentId));
+await componentsService.delete(componentId);
+      setComponents(prev => prev.filter(c => c.id !== componentId));
       toast.success("Component deleted successfully");
     } catch (err) {
       toast.error(`Failed to delete component: ${err.message}`);
@@ -171,7 +171,7 @@ const handleDeleteComponent = async (componentId) => {
               <h1 className="text-lg font-semibold text-white">
                 {site?.name}
               </h1>
-              <p className="text-sm text-slate-400">
+<p className="text-sm text-slate-400">
                 {currentPage?.title || "Select a page"}
               </p>
             </div>
@@ -179,16 +179,16 @@ const handleDeleteComponent = async (componentId) => {
           
           <div className="flex items-center space-x-3">
             {pages.length > 1 && (
-              <select
-                value={currentPage?.Id || ""}
+<select
+                value={currentPage?.id || ""}
                 onChange={(e) => {
-                  const page = pages.find(p => p.Id === parseInt(e.target.value));
+                  const page = pages.find(p => p.id === parseInt(e.target.value));
                   if (page) handlePageChange(page);
                 }}
                 className="bg-surface border border-slate-600 text-white px-3 py-2 rounded-lg text-sm"
-              >
+>
                 {pages.map(page => (
-                  <option key={page.Id} value={page.Id}>
+                  <option key={page.id} value={page.id}>
                     {page.title}
                   </option>
                 ))}
