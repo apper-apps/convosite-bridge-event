@@ -82,11 +82,11 @@ case "features":
               <h3 className="text-2xl font-bold text-white mb-6 text-center">
                 {content.title}
               </h3>
-            )}
+)}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {content?.features?.map((feature, index) => (
                 <div
-                  key={`feature-${feature.title}-${index}`}
+                  key={`feature-${feature.title || 'untitled'}-${index}`}
                   className="text-center p-6 rounded-lg bg-surface/50 border border-white/10"
                 >
                   <div className="w-12 h-12 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
@@ -210,11 +210,11 @@ case "gallery":
               <h3 className="text-2xl font-bold text-white mb-6 text-center">
                 {content.title}
               </h3>
-            )}
+)}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {content?.images?.map((image, index) => (
                 <img 
-                  key={index}
+                  key={`gallery-image-${index}`}
                   src={image?.src || "https://via.placeholder.com/400x300/1e293b/64748b?text=Gallery+Image"} 
                   alt={image?.alt || `Gallery image ${index + 1}`}
                   className="w-full h-48 object-cover rounded-lg"

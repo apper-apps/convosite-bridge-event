@@ -109,7 +109,7 @@ const handleDeleteComponent = (componentId) => {
               <div className="space-y-4">
                 {components.map((component, index) => (
                   <motion.div
-                    key={component.id}
+                    key={component.id || `component-${index}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
