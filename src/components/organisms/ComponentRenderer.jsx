@@ -124,7 +124,7 @@ case 'gallery':
             </div>
           </motion.section>
         );
-      case "contact":
+case "contact":
         return (
           <div className="bg-surface/50 rounded-lg p-6">
             {content?.title && (

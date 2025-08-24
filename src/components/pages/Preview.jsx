@@ -36,9 +36,9 @@ const Preview = () => {
       if (defaultPage) {
         setCurrentPage(defaultPage);
         
-        // Load components for current page
-        const componentsData = await componentsService.getByPageId(defaultPage.Id);
-        setComponents(componentsData);
+// Load components for current page
+        const componentsData = await componentsService.getByPageId(defaultPage.Id || defaultPage.id);
+        setComponents(componentsData || []);
       }
     } catch (err) {
       setError("Failed to load preview data. Please try again.");
@@ -54,9 +54,9 @@ const Preview = () => {
 
   const handlePageChange = async (page) => {
     try {
-      setCurrentPage(page);
-      const componentsData = await componentsService.getByPageId(page.Id);
-      setComponents(componentsData);
+setCurrentPage(page);
+      const componentsData = await componentsService.getByPageId(page.Id || page.id);
+      setComponents(componentsData || []);
     } catch (err) {
       console.error("Error loading page components:", err);
     }
@@ -108,16 +108,16 @@ const Preview = () => {
           <div className="flex items-center space-x-3">
             {pages.length > 1 && (
               <select
-                value={currentPage?.Id || ""}
+value={currentPage?.Id || currentPage?.id || ""}
                 onChange={(e) => {
-                  const page = pages.find(p => p.Id === parseInt(e.target.value));
+                  const page = pages.find(p => (p.Id || p.id) === parseInt(e.target.value));
                   if (page) handlePageChange(page);
                 }}
                 className="bg-surface border border-slate-600 text-white px-3 py-2 rounded-lg text-sm"
               >
                 {pages.map(page => (
-                  <option key={page.Id} value={page.Id}>
-                    {page.title}
+                  <option key={page.Id || page.id} value={page.Id || page.id}>
+                    {page.title || 'Untitled Page'}
                   </option>
                 ))}
               </select>
@@ -147,8 +147,8 @@ const Preview = () => {
           </div>
         ) : (
           <div className="space-y-6">
-            {components.map((component) => (
-              <div key={component.Id} className="w-full">
+{components.map((component) => (
+              <div key={component.Id || component.id} className="w-full">
                 <ComponentRenderer component={component} />
               </div>
             ))}

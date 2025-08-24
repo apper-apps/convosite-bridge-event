@@ -66,10 +66,10 @@ features: {
           { id: "gallery-2", src: "/api/placeholder/300/200", alt: "Gallery image 2" },
           { id: "gallery-3", src: "/api/placeholder/300/200", alt: "Gallery image 3" }
         ]
-      }
+}
     };
     
-    return defaults[type] || {};
+    return defaults[type] || { title: "Default Component", description: "Component content" };
   };
 
   const handleComponentClick = (component) => {
